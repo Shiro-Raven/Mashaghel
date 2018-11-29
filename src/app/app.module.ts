@@ -26,7 +26,9 @@ import { AppRoutingModule } from './app-routing.module';
     AuthModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    AppRoutingModule,
+    TodoModule
   ],
   providers: [],
   bootstrap: [AppComponent],
