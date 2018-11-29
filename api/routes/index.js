@@ -1,9 +1,50 @@
 var express = require('express');
+var passport = require('passport');
+var jwt = require('jsonwebtoken');
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.send('Server Works');
-});
+module.exports = function (passport) {
+  // --- Auth --- //
+  router.post('/signup', function(req, res, next) {
+    passport.authenticate('local-signup', function(err, user, info) {
+      if(err) {
+        throw err;
+      } else if(!user) {
+        return res.status(409).json({
+          error: null,
+          data: null,
+          message: info.message
+        });
+      } else {
+        return res.status(201).json({
+          error: null,
+          data: user,
+          message: info.message
+        });
+      }
+    })(req, res, next);
+  });
 
-module.exports = router;
+  router.post('/signin', function(req, res, next) {
+    passport.authenticate('local-signin', function(err, user, info) {
+      if(err) {
+        throw err;
+      } else if(!user) {
+        return res.status(422).json({
+          error: null,
+          data: null,
+          message: info.message
+        });
+      } else {
+        return res.status(200).json({
+          error: null,
+          data: user,
+          message: info.message
+        });
+      }
+    })(req, res, next);
+  });
+
+  module.exports = router;
+  return router;
+}

@@ -10,8 +10,6 @@ var path = require('path');
 
 //config file
 var config = require('./api/config/config');
-//router
-var router = require('./api/routes/index');
 
 //express app
 var app = express();
@@ -25,6 +23,8 @@ app.use(cors({
   origin: true
 }));
 
+require('./api/config/passport')(passport);
+
 //middleware
 app.use(helmet());
 app.use(compression());
@@ -34,8 +34,11 @@ app.use(bodyParser.urlencoded({
   extended: false
 }));
 app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 
 //router
+var router = require('./api/routes/index')(passport);
 app.use('/api', router);
 
 // mongoose Database connection
@@ -52,6 +55,7 @@ app.use(function (err, req, res, next) {
   if (err.statusCode === 404) {
     return next();
   }
+  console.log(err);
   res.status(500).json({
     // Never leak the stack trace of the err if running in production mode
     data: null,
