@@ -5,19 +5,26 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 import { MatButtonModule } from '@angular/material';
+
+import { LandingComponent } from './landing/landing.component';
+
+import { TodoModule } from './todo/todo.module';
+
 import { AppRoutingModule } from './app-routing.module';
-import {TodoModule} from './todo/todo.module';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LandingComponent
   ],
   imports: [
+    AppRoutingModule,
+    TodoModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
     AppRoutingModule,
     TodoModule
-  
   ],
   providers: [],
   bootstrap: [AppComponent]
