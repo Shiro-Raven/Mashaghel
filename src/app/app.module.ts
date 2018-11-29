@@ -5,7 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 import { MatButtonModule } from '@angular/material';
-
+import { AppRoutingModule } from './app-routing.module';
+import {TodoModule} from './todo/todo.module';
 @NgModule({
   declarations: [
     AppComponent
@@ -13,7 +14,10 @@ import { MatButtonModule } from '@angular/material';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    AppRoutingModule,
+    TodoModule
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
