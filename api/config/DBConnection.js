@@ -16,3 +16,4 @@ catch(function (err) {
 });
 
 //TODO: add models
+require('../models/User');
