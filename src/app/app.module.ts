@@ -7,8 +7,11 @@ import { AppComponent } from './app.component';
 import { MatButtonModule } from '@angular/material';
 
 import { LandingComponent } from './landing/landing.component';
+import { SignUpComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
 
 import { TodoModule } from './todo/todo.module';
+import { AuthModule } from './auth/auth.module';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -20,11 +23,13 @@ import { AppRoutingModule } from './app-routing.module';
   imports: [
     AppRoutingModule,
     TodoModule,
+    AuthModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [SignUpComponent, LoginComponent]
 })
 export class AppModule { }
