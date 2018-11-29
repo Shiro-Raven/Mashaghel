@@ -1,7 +1,7 @@
 var config = require('../config/config');
 var mongoose = require('mongoose');
 
-var User = mongoose.Schema({
+var userSchema = mongoose.Schema({
     email: {
         type: String,
         lowercase: true,
@@ -18,4 +18,4 @@ var User = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('User', User);
+module.exports = mongoose.model('User', userSchema, 'users');
