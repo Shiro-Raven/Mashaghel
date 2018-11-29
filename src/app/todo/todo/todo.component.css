@@ -1,0 +1,12 @@
+.example-card {
+    max-width: 400px;
+    display: inline-block;
+
+    margin: 2px;
+    height: 150px;
+  }
+  .example-header-image {
+    background-image: url('https://image.flaticon.com/icons/svg/235/235290.svg');
+    background-size: cover;
+  }
+  
