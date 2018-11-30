@@ -2,6 +2,7 @@ var express = require('express');
 var passport = require('passport');
 var jwt = require('jsonwebtoken');
 var router = express.Router();
+var redisClient = require('../config/redis');
 
 module.exports = function (passport) {
   // --- Auth --- //
