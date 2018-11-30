@@ -72,6 +72,7 @@ module.exports = function (passport) {
   });
 
   router.post('/createtodo', isSignedIn, ToDoController.createToDo);
+  router.post('/deletetodo', isSignedIn, ToDoController.deleteToDo);
 
 
   module.exports = router;
