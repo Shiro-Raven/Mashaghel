@@ -28,6 +28,9 @@ export class LoginComponent {
         email: this.email,
         password: this.password
       };
+
+      const _this = this;
+      this.authService.signIn(signInData).subscribe();
     }
   }
 }
