@@ -1,4 +1,4 @@
-/*eslint max-statements: ["error", 11]*/
+/*eslint max-statements: ["error", 50]*/
 
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
@@ -61,6 +61,68 @@ module.exports.createToDo = function (req, res, next) {
     });
 };
 
+module.exports.updateToDo = function (req, res, next) {
+    var todo = req.user.todos.id(req.body._id);
+    if (!todo) {
+        return res.status(404).json({
+            data: null,
+            error: null,
+            msg: 'To Do Is Not Found!'
+        });
+    }
+
+    if (req.body.name) {
+        todo.name = req.body.name;
+    }
+
+    if (req.body.description) {
+        todo.description = req.body.description;
+    }
+
+    if (req.body.deadline) {
+        todo.deadline = req.body.deadline;
+    }
+
+    if (req.body.type) {
+        if ('Event'.localeCompare(req.body.type) !== 0 && 'Task'.localeCompare(req.body.type) !== 0) {
+            return res.status(422).json({
+                data: null,
+                error: null,
+                msg: 'Type Must Either Be "Event" OR "Task"!'
+            });
+        }
+
+        todo.type = req.body.type;
+    }
+
+    if (req.body.emails) {
+        todo.emails = req.body.emails;
+    }
+
+    if (req.body.lat) {
+        todo.lat = req.body.lat;
+    }
+
+    if (req.body.lng) {
+        todo.lng = req.body.lng;
+    }
+
+    req.user.todos.id(req.body._id).remove();
+    req.user.todos.push(todo);
+
+    User.findByIdAndUpdate(req.user._id, req.user, function (err, _) {
+        if (err) {
+            throw err;
+        }
+
+        return res.status(200).json({
+            data: todo,
+            error: null,
+            msg: 'To Do Is Updated Successfully!'
+        });
+    });
+};
+
 module.exports.readToDo = function (req, res, next) {
     if (!req.body._id) {
         return res.status(422).json({
@@ -73,7 +135,7 @@ module.exports.readToDo = function (req, res, next) {
     var todo = req.user.todos.id(req.body._id);
     if (!todo) {
         return res.status(404).json({
-            data: todo,
+            data: null,
             error: null,
             msg: 'To Do Is Not Found!'
         });
@@ -98,7 +160,7 @@ module.exports.deleteToDo = function (req, res, next) {
     var todo = req.user.todos.id(req.body._id);
     if (!todo) {
         return res.status(404).json({
-            data: todo,
+            data: null,
             error: null,
             msg: 'To Do Is Not Found!'
         });
