@@ -1,38 +1,41 @@
 var mongoose = require('mongoose');
 
 var toDoSchema = mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
+    deadline: {
         index: true,
-        maxlength: 100
+        required: true,
+        type: Date
     },
     description: {
-        type: String,
+        default: '',
         maxlength: 1000,
-        default: ''
-    },
-    deadline: {
-        type: Date,
-        required: true,
-        index: true
-    },
-    type: {
-        type: String,
-        required: true,
-        enum: ['event', 'task']
+        type: String
     },
     emails: {
-        type: [String],
-        default: []
+        default: [],
+        type: [String]
     },
     lat: {
-        type: mongoose.Schema.Types.Decimal128,
-        default: 0
+        default: 0,
+        type: mongoose.Schema.Types.Decimal128
     },
-    lat: {
-        type: mongoose.Schema.Types.Decimal128,
-        default: 0
+    lng: {
+        default: 0,
+        type: mongoose.Schema.Types.Decimal128
+    },
+    name: {
+        index: true,
+        maxlength: 100,
+        required: true,
+        type: String
+    },
+    type: {
+        enum: [
+            'event',
+            'task'
+        ],
+        required: true,
+        type: String
     }
 });
 
