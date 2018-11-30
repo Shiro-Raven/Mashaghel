@@ -56,8 +56,33 @@ module.exports.createToDo = function (req, res, next) {
         return res.status(200).json({
             data: newToDo,
             error: null,
-            msg: 'To Do Created Successfully!'
+            msg: 'To Do Is Created Successfully!'
         });
+    });
+};
+
+module.exports.readToDo = function (req, res, next) {
+    if (!req.body._id) {
+        return res.status(422).json({
+            data: null,
+            error: null,
+            msg: '_id Is Required!'
+        });
+    }
+
+    var todo = req.user.todos.id(req.body._id);
+    if (!todo) {
+        return res.status(404).json({
+            data: todo,
+            error: null,
+            msg: 'To Do Is Not Found!'
+        });
+    }
+
+    return res.status(200).json({
+        data: todo,
+        error: null,
+        msg: 'To Do Is Read Successfully!'
     });
 };
 
@@ -70,7 +95,16 @@ module.exports.deleteToDo = function (req, res, next) {
         });
     }
 
-    req.user.todos.remove({ _id: req.body._id });
+    var todo = req.user.todos.id(req.body._id);
+    if (!todo) {
+        return res.status(404).json({
+            data: todo,
+            error: null,
+            msg: 'To Do Is Not Found!'
+        });
+    }
+
+    req.user.todos.remove(todo);
     User.findByIdAndUpdate(req.user._id, req.user, function (err, _) {
         if (err) {
             throw err;
@@ -79,7 +113,7 @@ module.exports.deleteToDo = function (req, res, next) {
         return res.status(200).json({
             data: null,
             error: null,
-            msg: 'To Do Deleted Successfully!'
+            msg: 'To Do Is Deleted Successfully!'
         });
     });
 };

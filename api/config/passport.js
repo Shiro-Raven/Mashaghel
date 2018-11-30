@@ -5,12 +5,10 @@ var User = require('../models/User');
 module.exports = function (passport) {
 
     passport.serializeUser(function (user, done) {
-        console.log('Serializing');
         done(null, user._id);
     });
 
     passport.deserializeUser(function (_id, done) {
-        console.log('DeSerializing');
         User.findById(_id, function (err, user) {
             done(err, user);
         });
