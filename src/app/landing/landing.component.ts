@@ -15,21 +15,19 @@ export class LandingComponent implements OnInit {
 
   openSignup(): void {
     const dialogRef = this.dialog.open(SignUpComponent, {
-      width: '250px'
+      width: '40%'
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
     });
   }
 
   openLogin(): void {
     const dialogRef = this.dialog.open(LoginComponent, {
-      width: '250px'
+      width: '40%'
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      console.log('The dialog was closed');
     });
   }
 

@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
-import { MatButtonModule } from '@angular/material';
+import { MatButtonModule, MatDialogModule } from '@angular/material';
 
 import { LandingComponent } from './landing/landing.component';
 import { SignUpComponent } from './auth/signup/signup.component';
@@ -27,6 +27,7 @@ import { AppRoutingModule } from './app-routing.module';
     BrowserModule,
     BrowserAnimationsModule,
     MatButtonModule,
+    MatDialogModule,
     AppRoutingModule,
     TodoModule
   ],

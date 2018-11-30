@@ -1,3 +1,4 @@
+/* eslint-disable */
 var config = require('../config/config');
 var mongoose = require('mongoose');
 
@@ -7,7 +8,7 @@ var userSchema = mongoose.Schema({
         lowercase: true,
         required: true,
         index: true,
-        uniqure: true,
+        unique: true,
         trim: true,
         match: config.EMAIL_REGEX
     },
