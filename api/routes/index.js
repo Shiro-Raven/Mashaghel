@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var redisClient = require('../config/redis');
+require('../controllers/RemindersController');
 
 var ToDoController = require('../controllers/ToDoController');
 
@@ -72,7 +72,7 @@ module.exports = function (passport) {
     })(req, res, next);
   });
 
-  router.get('/signout', isSignedIn, function (req, res, next) {
+  router.get('/signout', isSignedIn, function (req, res) {
     req.logOut();
 
     return res.status(200).json({
