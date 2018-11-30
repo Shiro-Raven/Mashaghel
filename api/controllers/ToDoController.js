@@ -1,5 +1,6 @@
 /*eslint max-statements: ["error", 50]*/
 
+var config = require('../config/config');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var ToDo = mongoose.model('ToDo');
@@ -35,6 +36,19 @@ module.exports.createToDo = function (req, res, next) {
             error: null,
             msg: 'Type Must Either Be "Event" OR "Task"!'
         });
+    }
+
+    if (req.body.emails) {
+        var index = 0;
+        for (index = 0; index < req.body.emails.length; index++) { 
+            if (!req.body.emails[index].match(config.EMAIL_REGEX)) {
+                return res.status(422).json({
+                    data: null,
+                    error: null,
+                    msg: 'Email "' + req.body.emails[index] + '" Is Not Correct!'
+                });
+            }
+        }
     }
 
     var newToDo = new ToDo({
@@ -96,6 +110,17 @@ module.exports.updateToDo = function (req, res, next) {
     }
 
     if (req.body.emails) {
+        var index = 0;
+        for (index = 0; index < req.body.emails.length; index++) { 
+            if (!req.body.emails[index].match(config.EMAIL_REGEX)) {
+                return res.status(422).json({
+                    data: null,
+                    error: null,
+                    msg: 'Email "' + req.body.emails[index] + '" Is Not Correct!'
+                });
+            }
+        }
+
         todo.emails = req.body.emails;
     }
 

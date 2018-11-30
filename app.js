@@ -33,6 +33,8 @@ app.use(logger('dev'));
 app.use(cookieParser());
 app.use(session({
   cookie: true,
+  resave: true,
+  saveUninitialized: true,
   secret: config.SECRET
 }));
 app.use(passport.initialize());
