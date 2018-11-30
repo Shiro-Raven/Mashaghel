@@ -71,6 +71,16 @@ module.exports = function (passport) {
     })(req, res, next);
   });
 
+  router.get('/signout', isSignedIn, function (req, res, next) {
+    req.logOut();
+
+    return res.status(200).json({
+      data: null,
+      error: null,
+      message: 'Sign Out Is Successful!'
+    });
+  });
+
   router.post('/createtodo', isSignedIn, ToDoController.createToDo);
   router.post('/deletetodo', isSignedIn, ToDoController.deleteToDo);
 
