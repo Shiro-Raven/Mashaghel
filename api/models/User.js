@@ -19,7 +19,10 @@ var userSchema = mongoose.Schema({
         trim: true,
         type: String
     },
-    todos: [toDoSchema]
+    todos: {
+        default: [],
+        type: [toDoSchema]
+    }
 });
 
 module.exports = mongoose.model('User', userSchema, 'users');

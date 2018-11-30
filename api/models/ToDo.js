@@ -1,3 +1,4 @@
+var config = require('../config/config');
 var mongoose = require('mongoose');
 
 var toDoSchema = mongoose.Schema({
@@ -13,6 +14,7 @@ var toDoSchema = mongoose.Schema({
     },
     emails: {
         default: [],
+        match: config.EMAIL_REGEX,
         type: [String]
     },
     lat: {
@@ -31,8 +33,8 @@ var toDoSchema = mongoose.Schema({
     },
     type: {
         enum: [
-            'event',
-            'task'
+            'Event',
+            'Task'
         ],
         required: true,
         type: String
