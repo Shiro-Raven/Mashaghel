@@ -14,11 +14,15 @@ import { TodoModule } from './todo/todo.module';
 import { AuthModule } from './auth/auth.module';
 
 import { AppRoutingModule } from './app-routing.module';
+import { TrialComponent } from './trial/trial.component';
+
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent
+    LandingComponent,
+    TrialComponent
   ],
   imports: [
     AppRoutingModule,
@@ -29,7 +33,10 @@ import { AppRoutingModule } from './app-routing.module';
     MatButtonModule,
     MatDialogModule,
     AppRoutingModule,
-    TodoModule
+    TodoModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyCdpRX211Yu77Vwm0NNwjceaLdeLOurd8A'
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],
