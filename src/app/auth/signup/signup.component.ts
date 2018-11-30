@@ -35,6 +35,14 @@ export class SignUpComponent {
         password: this.password
       };
 
+      const _this = this;
+      this.authService.signUp(signUpData).subscribe(function (res) {
+        _this.authService.LoggedInUser = res.data.email;
+        alert('Sign-Up successful');
+        _this.dialogRef.close(true);
+      }, function (err) {
+        alert(err.error.message);
+      });
     }
   }
 }

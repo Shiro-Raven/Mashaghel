@@ -30,7 +30,12 @@ export class LoginComponent {
       };
 
       const _this = this;
-      this.authService.signIn(signInData).subscribe();
+      this.authService.signIn(signInData).subscribe(function (res) {
+        _this.authService.LoggedInUser = res.data.email;
+        _this.dialogRef.close(true);
+      }, function (err) {
+        alert(err.error.message);
+      });
     }
   }
 }
