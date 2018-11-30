@@ -17,3 +17,4 @@ catch(function (err) {
 
 //TODO: add models
 require('../models/User');
+require('../models/ToDo');
