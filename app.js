@@ -29,13 +29,13 @@ require('./api/config/passport')(passport);
 app.use(helmet());
 app.use(compression());
 app.use(logger('dev'));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: false
 }));
-app.use(cookieParser());
-app.use(passport.initialize());
-app.use(passport.session());
 
 //router
 var router = require('./api/routes/index')(passport);

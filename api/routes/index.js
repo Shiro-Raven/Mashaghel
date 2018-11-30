@@ -5,11 +5,11 @@ var router = express.Router();
 
 module.exports = function (passport) {
   // --- Auth --- //
-  router.post('/signup', function(req, res, next) {
-    passport.authenticate('local-signup', function(err, user, info) {
-      if(err) {
+  router.post('/signup', function (req, res, next) {
+    passport.authenticate('local-signup', function (err, user, info) {
+      if (err) {
         throw err;
-      } else if(!user) {
+      } else if (!user) {
         return res.status(409).json({
           error: null,
           data: null,
@@ -25,11 +25,11 @@ module.exports = function (passport) {
     })(req, res, next);
   });
 
-  router.post('/signin', function(req, res, next) {
-    passport.authenticate('local-signin', function(err, user, info) {
-      if(err) {
+  router.post('/signin', function (req, res, next) {
+    passport.authenticate('local-signin', function (err, user, info) {
+      if (err) {
         throw err;
-      } else if(!user) {
+      } else if (!user) {
         return res.status(422).json({
           error: null,
           data: null,
