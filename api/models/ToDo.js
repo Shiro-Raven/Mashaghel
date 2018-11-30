@@ -31,8 +31,8 @@ var toDoSchema = mongoose.Schema({
     },
     type: {
         enum: [
-            'event',
-            'task'
+            'Event',
+            'Task'
         ],
         required: true,
         type: String

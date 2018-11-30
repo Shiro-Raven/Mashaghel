@@ -4,6 +4,7 @@ var cookieParser = require('cookie-parser');
 var compression = require('compression');
 var cors = require('cors');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 var helmet = require('helmet');
 var passport = require('passport');
 var path = require('path');
@@ -30,6 +31,10 @@ app.use(helmet());
 app.use(compression());
 app.use(logger('dev'));
 app.use(cookieParser());
+app.use(session({
+  cookie: true,
+  secret: config.SECRET
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
