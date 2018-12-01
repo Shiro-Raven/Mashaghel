@@ -1,6 +1,7 @@
 import { Component, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TodoService } from '../todo.service';
+import { Time } from '@angular/common';
 
 @Component({
   selector: 'app-create-todo',
@@ -13,6 +14,7 @@ export class CreateTodoComponent {
   description: string;
   date: Date;
   type: boolean;
+  time: string;
 
   constructor(
     public dialogRef: MatDialogRef<CreateTodoComponent>,
@@ -23,7 +25,9 @@ export class CreateTodoComponent {
   }
 
   onSubmit() {
-    console.log(this.date);
+    const array = this.time.split(':', 2);
+    console.log(array);
+    console.log(new Date(this.date.setHours(parseInt(array[0], 10), parseInt(array[1], 10), 0, 0)));
     const todoData = {
       name: this.name,
       description: this.description,

@@ -37,17 +37,25 @@
     
       <mat-list-item>
         <mat-form-field>
-          <input matInput [matDatepicker]="picker1" placeholder="Deadline/Start time" name = "date" [(ngModel)]="date">
+          <input matInput [matDatepicker]="picker1" placeholder="Date" name = "date" [(ngModel)]="date">
           <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
           <mat-datepicker #picker1></mat-datepicker>
        </mat-form-field>
       </mat-list-item>
 
       <mat-divider></mat-divider>
-
-
       <br>
 
+      <mat-list-item>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="deadline/start time:" value="" [(ngModel)]="time" name="time" id="time" required type="time">
+        </mat-form-field>
+      </mat-list-item>
+
+      <mat-divider></mat-divider>
+
+      <br>
+      
       <mat-list-item>
         <button mat-button color="primary" type="submit" [disabled]="!createTodo.form.valid" class="confirm">Add Todo</button>
       </mat-list-item>

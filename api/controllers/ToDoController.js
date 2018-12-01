@@ -13,7 +13,7 @@ module.exports.createToDo = function (req, res, next) {
             msg: 'Name Is Required!'
         });
     }
-
+    console.log(req.body.deadline);
     if (!req.body.deadline) {
         return res.status(422).json({
             data: null,
@@ -183,10 +183,14 @@ module.exports.getToDos = function (req, res, next) {
     }
     var arr = [];
     var date = new Date(req.body.date);
+
     for (var i = 0; i < req.user.todos.length; i++) {
         console.log(req.user.todos[i].deadline.getTime());
         console.log(date.getTime());
-        if (req.user.todos[i].deadline.getTime() === date.getTime()) {
+        var d = new Date(req.user.todos[i].deadline);
+        d.setHours(0, 0, 0, 0);
+        console.log(d);
+        if (d.getTime() === date.getTime()) {
             console.log(i);
             arr.push(req.user.todos[i]);
         }

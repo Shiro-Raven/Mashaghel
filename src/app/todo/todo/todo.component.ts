@@ -17,16 +17,17 @@ export class TodoComponent implements OnInit {
   constructor(public dialog: MatDialog, public todoService: TodoService) { }
   ngOnInit() {
     const _this = this;
+
     const todoData = {
       date: _this.date.setHours(0, 0, 0, 0)
     };
+    console.log(todoData.date);
       this.todoService.getTodos(todoData).subscribe(function (res) {
         _this.todos = res.data;
         console.log(res.data);
       }, function (err) {
         alert(err.error.message);
       });
-    console.log(this.todos);
   }
   reload() {
     const _this = this;
@@ -35,7 +36,6 @@ export class TodoComponent implements OnInit {
     };
       this.todoService.getTodos(todoData).subscribe(function (res) {
         _this.todos = res.data;
-        console.log(res.data);
       }, function (err) {
         alert(err.error.message);
       });
