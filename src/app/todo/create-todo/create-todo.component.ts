@@ -1,7 +1,8 @@
 import { Component, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TodoService } from '../todo.service';
-import { Time } from '@angular/common';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {MatChipInputEvent} from '@angular/material';
 
 @Component({
   selector: 'app-create-todo',
@@ -15,6 +16,38 @@ export class CreateTodoComponent {
   date: Date;
   type: boolean;
   time: string;
+  minDate = new Date();
+  visible = true;
+  selectable = true;
+  removable = true;
+  addOnBlur = true;
+  readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+  emails: string[] = [];
+
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our email
+    console.log(value);
+    console.log(input);
+    if ((value || '').trim()) {
+      this.emails.push(value.trim());
+      console.log(this.emails);
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+  }
+
+  remove(email: string): void {
+    const index = this.emails.indexOf(email);
+    if (index >= 0) {
+      this.emails.splice(index, 1);
+    }
+  }
 
   constructor(
     public dialogRef: MatDialogRef<CreateTodoComponent>,
@@ -26,13 +59,12 @@ export class CreateTodoComponent {
 
   onSubmit() {
     const array = this.time.split(':', 2);
-    console.log(array);
-    console.log(new Date(this.date.setHours(parseInt(array[0], 10), parseInt(array[1], 10), 0, 0)));
     const todoData = {
       name: this.name,
       description: this.description,
       deadline: this.date,
-      type: this.type
+      type: this.type,
+      emails: this.emails
     };
 
     const _this = this;
