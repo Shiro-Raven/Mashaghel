@@ -1,20 +1,27 @@
 var config = require('../config/config');
 var mongoose = require('mongoose');
 
+var ToDo = require('../models/ToDo');
+var toDoSchema = ToDo.schema;
+
 var userSchema = mongoose.Schema({
     email: {
-        type: String,
-        lowercase: true,
-        required: true,
         index: true,
-        uniqure: true,
+        lowercase: true,
+        match: config.EMAIL_REGEX,
+        required: true,
         trim: true,
-        match: config.EMAIL_REGEX
+        type: String,
+        unique: true
     },
     password: {
-        type: String,
         required: true,
-        trim: true
+        trim: true,
+        type: String
+    },
+    todos: {
+        default: [],
+        type: [toDoSchema]
     }
 });
 

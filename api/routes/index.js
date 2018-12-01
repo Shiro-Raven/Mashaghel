@@ -1,9 +1,94 @@
 var express = require('express');
 var router = express.Router();
+require('../controllers/RemindersController');
 
-/* GET home page. */
-router.get('/', function(req, res) {
-  res.send('Server Works');
-});
+var ToDoController = require('../controllers/ToDoController');
 
-module.exports = router;
+var isSignedIn = function (req, res, next) {
+  if (req.isAuthenticated()) {
+    return next();
+  }
+
+  return res.status(401).json({
+    data: null,
+    error: null,
+    msg: 'User Is Not Signed In!'
+  });
+};
+
+module.exports = function (passport) {
+  // --- Auth --- //
+  router.post('/signup', function (req, res, next) {
+    passport.authenticate('local-signup', function (err, user, info) {
+      if (err) {
+        throw err;
+      } else if (!user) {
+        return res.status(409).json({
+          data: null,
+          error: null,
+          message: info.message
+        });
+      }
+
+      req.logIn(user, function (err2) {
+        if (err2) {
+          throw err2;
+        }
+
+        return res.status(201).json({
+          data: user,
+          error: null,
+          message: info.message
+        });
+      });
+
+    })(req, res, next);
+  });
+
+  router.post('/signin', function (req, res, next) {
+    passport.authenticate('local-signin', function (err, user, info) {
+      if (err) {
+        throw err;
+      } else if (!user) {
+        return res.status(422).json({
+          data: null,
+          error: null,
+          message: info.message
+        });
+      }
+
+      req.logIn(user, function (err2) {
+        if (err2) {
+          throw err2;
+        }
+
+        return res.status(200).json({
+          data: user,
+          error: null,
+          message: info.message
+        });
+      });
+
+    })(req, res, next);
+  });
+
+  router.get('/signout', isSignedIn, function (req, res) {
+    req.logOut();
+
+    return res.status(200).json({
+      data: null,
+      error: null,
+      message: 'Sign Out Is Successful!'
+    });
+  });
+
+  router.post('/createtodo', isSignedIn, ToDoController.createToDo);
+  router.post('/readtodo', isSignedIn, ToDoController.readToDo);
+  router.patch('/updatetodo', isSignedIn, ToDoController.updateToDo);
+  router.post('/deletetodo', isSignedIn, ToDoController.deleteToDo);
+
+
+  module.exports = router;
+
+  return router;
+};
