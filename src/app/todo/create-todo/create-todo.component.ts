@@ -59,6 +59,7 @@ export class CreateTodoComponent {
 
   onSubmit() {
     const array = this.time.split(':', 2);
+    this.date.setHours(parseInt(array[0], 10), parseInt(array[1], 10), 0, 0);
     const todoData = {
       name: this.name,
       description: this.description,
