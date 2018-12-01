@@ -20,5 +20,10 @@ export class TodoService {
     const todoUrl = this.serverLink + 'gettodos';
     return this.http.post<any>(todoUrl, todoData, httpOptions);
   }
+  public deleteTodo(id: String): Observable<any> {
+    const todoUrl = this.serverLink + 'deletetodo';
+    const todoData = {_id: id};
+    return this.http.post<any>(todoUrl, todoData, httpOptions);
+  }
 
 }

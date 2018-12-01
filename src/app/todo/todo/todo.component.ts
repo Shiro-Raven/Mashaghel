@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {Todo} from '../Todo';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {FormControl} from '@angular/forms';
-import {todoArr} from '../todo-mock';
 import { MatDialog } from '@angular/material';
 import {CreateTodoComponent} from '../create-todo/create-todo.component';
 import { TodoService } from '../todo.service';
@@ -54,6 +53,22 @@ export class TodoComponent implements OnInit {
        this.reload();
       }
     });
+  }
+  deleteTodo(_id: String, done: number): void {
+    for (let i = 0; i < this.todos.length; i++) {
+      if ( this.todos[i]._id === _id) {
+        this.todos.splice(i, 1);
+        break;
+      }
+    }
+    this.todoService.deleteTodo(_id).subscribe(function(res) {
+      console.log('success');
+    }, function(err) {
+      alert(err.error.message);
+    });
+    if (done) {
+      alert('Good Job!');
+    }
   }
 
 }
