@@ -3,23 +3,57 @@ import {Todo} from '../Todo';
 import {MatDatepickerInputEvent} from '@angular/material/datepicker';
 import {FormControl} from '@angular/forms';
 import {todoArr} from '../todo-mock';
+import { MatDialog } from '@angular/material';
+import {CreateTodoComponent} from '../create-todo/create-todo.component';
+import { TodoService } from '../todo.service';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
   styleUrls: ['./todo.component.css']
 })
 export class TodoComponent implements OnInit {
-  date = new FormControl(new Date());
+  date: Date = new Date();
   todos: Todo[];
 
-  constructor() { }
+  constructor(public dialog: MatDialog, public todoService: TodoService) { }
   ngOnInit() {
-    this.todos = todoArr;
+    const _this = this;
+    const todoData = {
+      date: _this.date.setHours(0, 0, 0, 0)
+    };
+      this.todoService.getTodos(todoData).subscribe(function (res) {
+        _this.todos = res.data;
+        console.log(res.data);
+      }, function (err) {
+        alert(err.error.message);
+      });
     console.log(this.todos);
   }
   reload() {
+    const _this = this;
+    const todoData = {
+      date: _this.date.setHours(0, 0, 0, 0)
+    };
+      this.todoService.getTodos(todoData).subscribe(function (res) {
+        _this.todos = res.data;
+        console.log(res.data);
+      }, function (err) {
+        alert(err.error.message);
+      });
+    console.log(this.todos);
+  }
 
-    console.log(this.date.value);
+  openCreateTodo(): void {
+    const dialogRef = this.dialog.open(CreateTodoComponent, {
+      width: '40%'
+    });
+
+    dialogRef.afterClosed().subscribe((success) => {
+      if (success) {
+       console.log('success');
+       this.reload();
+      }
+    });
   }
 
 }

@@ -4,11 +4,11 @@
     <img class="smallImage" src="../../../assets/img/todo-logo.png"/>
     <div>
         <mat-form-field>
-            <input matInput [matDatepicker]="picker1" placeholder="Your Todos on" [formControl]="date" (dateChange)="reload()">
+            <input matInput [matDatepicker]="picker1" placeholder="Your Todos on" [(ngModel)]="date" name = "date" (dateChange)="reload()">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>
          </mat-form-field>
-      <button mat-mini-fab><i>add</i></button>
+      <button mat-mini-fab (click)="openCreateTodo()"><i>add</i></button>
     </div>
     
     <mat-grid-list cols="3">
@@ -17,8 +17,8 @@
                     <mat-card-header>
                       <div mat-card-avatar class="example-header-image"></div>
                       <mat-card-title>{{todo.name}}</mat-card-title>
-                      <mat-card-subtitle *ngIf="todo.type == 'Event'">{{todo.type}} at {{todo.date | date:'shortTime'}}</mat-card-subtitle>
-                      <mat-card-subtitle *ngIf="todo.type == 'Task'">{{todo.type}} by {{todo.date | date:'shortTime'}}</mat-card-subtitle>
+                      <mat-card-subtitle *ngIf="todo.type == 'Event'">{{todo.type}} at {{todo.deadline | date:'shortTime'}}</mat-card-subtitle>
+                      <mat-card-subtitle *ngIf="todo.type == 'Task'">{{todo.type}} by {{todo.deadline | date:'shortTime'}}</mat-card-subtitle>
                     </mat-card-header>
                     <mat-card-content>
                       <p>

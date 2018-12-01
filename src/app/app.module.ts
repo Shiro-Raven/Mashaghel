@@ -17,6 +17,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TrialComponent } from './trial/trial.component';
 
 import { AgmCoreModule } from '@agm/core';
+import { CreateTodoComponent } from './todo/create-todo/create-todo.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,6 @@ import { AgmCoreModule } from '@agm/core';
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [SignUpComponent, LoginComponent]
+  entryComponents: [SignUpComponent, LoginComponent, CreateTodoComponent]
 })
 export class AppModule { }

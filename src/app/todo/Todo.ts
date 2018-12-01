@@ -2,8 +2,7 @@ export class Todo {
     _id: String;
     name: String;
     description: String;
-    date: Date;
+    deadline: Date;
     type: String;
-    emails: [String];
-    maps: String;
+    emails: String[];
  }
