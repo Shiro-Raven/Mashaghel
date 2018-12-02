@@ -9,7 +9,7 @@ const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/js
 export class TodoService {
 
   serverLink = environment.serverLink;
-  LoggedInUser = '';
+
   constructor(private http: HttpClient) { }
 
   public createTodo(todoData: any): Observable<any> {

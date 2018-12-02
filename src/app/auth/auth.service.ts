@@ -26,4 +26,9 @@ export class AuthService {
     return this.http.post<any>(signUpUrl, signUpData, httpOptions);
   }
 
+  public signOut(): Observable<any> {
+    const signOutUrl = this.serverLink + 'signout';
+    return this.http.get<any>(signOutUrl, httpOptions);
+  }
+
 }

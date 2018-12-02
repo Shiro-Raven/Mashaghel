@@ -1,8 +1,8 @@
-import { Component, Inject} from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { TodoService } from '../todo.service';
-import {COMMA, ENTER} from '@angular/cdk/keycodes';
-import {MatChipInputEvent} from '@angular/material';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material';
 
 @Component({
   selector: 'app-create-todo',
@@ -27,16 +27,14 @@ export class CreateTodoComponent {
   lng = 31.2221738;
   zoom = 14.24;
   checked = false;
+
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
 
     // Add our email
-    console.log(value);
-    console.log(input);
     if ((value || '').trim()) {
       this.emails.push(value.trim());
-      console.log(this.emails);
     }
 
     // Reset the input value
@@ -54,7 +52,9 @@ export class CreateTodoComponent {
 
   constructor(
     public dialogRef: MatDialogRef<CreateTodoComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public todoService: TodoService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, public todoService: TodoService) {
+    this.date = new Date(data.date);
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -67,7 +67,6 @@ export class CreateTodoComponent {
   onSubmit() {
     const array = this.time.split(':', 2);
     this.date.setHours(parseInt(array[0], 10), parseInt(array[1], 10), 0, 0);
-    console.log(this.lat, this.lng);
     const todoData = {
       name: this.name,
       description: this.description,

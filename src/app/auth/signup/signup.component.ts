@@ -1,6 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
+import { CookieService } from 'ngx-cookie-service';
+
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -15,7 +17,7 @@ export class SignUpComponent {
 
   constructor(
     public dialogRef: MatDialogRef<SignUpComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any, public authService: AuthService) { }
+    @Inject(MAT_DIALOG_DATA) public data: any, public authService: AuthService, private cookieService: CookieService) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -38,6 +40,7 @@ export class SignUpComponent {
       const _this = this;
       this.authService.signUp(signUpData).subscribe(function (res) {
         _this.authService.LoggedInUser = res.data.email;
+        _this.cookieService.set('user', _this.authService.LoggedInUser);
         alert('Sign-Up successful');
         _this.dialogRef.close(true);
       }, function (err) {

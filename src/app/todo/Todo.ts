@@ -3,7 +3,7 @@ export class Todo {
     name: String;
     description: String;
     deadline: Date;
-    type: String;
+    type: string;
     emails: String[];
     lat: number;
     lng: number;

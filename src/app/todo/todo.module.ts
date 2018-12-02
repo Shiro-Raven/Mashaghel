@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TodoComponent } from './todo/todo.component';
-import { MatFormField, MatFormFieldModule, MAT_DATE_LOCALE_PROVIDER,
-  MatDatepicker, MatDatepickerModule, MatNativeDateModule,
-  _MatInputMixinBase, MatInputModule, MatButtonModule, MatIconModule, MatCardModule, MatGridListModule, MatDialogModule, MatListModule, MatSelectModule, MatOptionModule, MatChipsModule, MatStepperModule, MatCheckboxModule } from '@angular/material';
+import {
+  MatFormFieldModule, MatDatepickerModule, MatNativeDateModule,
+  _MatInputMixinBase, MatInputModule, MatButtonModule, MatIconModule,
+  MatCardModule, MatGridListModule, MatDialogModule, MatListModule,
+  MatSelectModule, MatOptionModule, MatChipsModule, MatStepperModule, MatCheckboxModule
+} from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+
 import { CreateTodoComponent } from './create-todo/create-todo.component';
 import { TodoService } from './todo.service';
 
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -34,7 +40,7 @@ import { MapComponent } from './map/map.component';
     MatStepperModule,
     MatCheckboxModule
   ],
-  providers: [TodoService],
+  providers: [TodoService, CookieService],
   declarations: [TodoComponent, CreateTodoComponent, MapComponent]
 })
 export class TodoModule { }

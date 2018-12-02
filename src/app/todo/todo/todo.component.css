@@ -1,12 +1,21 @@
 .example-card {
-    max-width: 400px;
-    display: inline-block;
+  max-width: 400px;
+  display: inline-block;
+  margin: 2px;
+  min-height: 150px;
+  background-color: #f2dfc6;
+}
 
-    margin: 2px;
-    height: 200px;
-  }
-  .example-header-image {
-    background-image: url('https://image.flaticon.com/icons/svg/235/235290.svg');
-    background-size: cover;
-  }
-  
+.event {
+  background-color: #bd80ed;
+}
+
+.example-header-image {
+  background-image: url('https://image.flaticon.com/icons/svg/235/235290.svg');
+  background-size: cover;
+}
+
+.biggerFont {
+  font-size: 20px;
+  font-family: "Times New Roman", Times, serif;
+}
