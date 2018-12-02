@@ -13,7 +13,7 @@ module.exports.createToDo = function (req, res, next) {
             msg: 'Name Is Required!'
         });
     }
-
+    console.log(req.body.deadline);
     if (!req.body.deadline) {
         return res.status(422).json({
             data: null,
@@ -40,7 +40,7 @@ module.exports.createToDo = function (req, res, next) {
 
     if (req.body.emails) {
         var index = 0;
-        for (index = 0; index < req.body.emails.length; index++) { 
+        for (index = 0; index < req.body.emails.length; index++) {
             if (!req.body.emails[index].match(config.EMAIL_REGEX)) {
                 return res.status(422).json({
                     data: null,
@@ -111,7 +111,7 @@ module.exports.updateToDo = function (req, res, next) {
 
     if (req.body.emails) {
         var index = 0;
-        for (index = 0; index < req.body.emails.length; index++) { 
+        for (index = 0; index < req.body.emails.length; index++) {
             if (!req.body.emails[index].match(config.EMAIL_REGEX)) {
                 return res.status(422).json({
                     data: null,
@@ -170,6 +170,37 @@ module.exports.readToDo = function (req, res, next) {
         data: todo,
         error: null,
         msg: 'To Do Is Read Successfully!'
+    });
+};
+module.exports.getToDos = function (req, res, next) {
+    console.log('hey');
+    if (!req.body.date) {
+        return res.status(422).json({
+            data: null,
+            error: null,
+            msg: 'date Is Required!'
+        });
+    }
+    var arr = [];
+    var date = new Date(req.body.date);
+
+    for (var i = 0; i < req.user.todos.length; i++) {
+        console.log(req.user.todos[i].deadline.getTime());
+        console.log(date.getTime());
+        var d = new Date(req.user.todos[i].deadline);
+        d.setHours(0, 0, 0, 0);
+        console.log(d);
+        if (d.getTime() === date.getTime()) {
+            console.log(i);
+            arr.push(req.user.todos[i]);
+        }
+    }
+    console.log(arr);
+
+    return res.status(200).json({
+        data: arr,
+        error: null,
+        msg: 'ToDos are Read Successfully!'
     });
 };
 

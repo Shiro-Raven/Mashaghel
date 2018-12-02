@@ -86,7 +86,7 @@ module.exports = function (passport) {
   router.post('/readtodo', isSignedIn, ToDoController.readToDo);
   router.patch('/updatetodo', isSignedIn, ToDoController.updateToDo);
   router.post('/deletetodo', isSignedIn, ToDoController.deleteToDo);
-
+  router.post('/gettodos', isSignedIn, ToDoController.getToDos);
 
   module.exports = router;
 
