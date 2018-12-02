@@ -1,24 +1,27 @@
 version: "2"
 services:
-  redis:
-    image: redis
-    container_name: cache
-    expose:
-    - 6379
-
   web:
     build: ./
+    # restart: always
     environment:
     - NODE_ENV=prod
     - REDIS_URL=redis://cache
+    depends_on:
+    - redis
+    - mongo
     links:
     - redis
+    - mongo
     ports:
     - "3000:3000"
-    depends_on:
-    - mongo
 
   mongo:
     image: mongo
     ports:
     - "27017:27017"
+
+  redis:
+    image: redis
+    container_name: cache
+    expose:
+    - 6379

@@ -4,5 +4,5 @@ var redisClient = require('../config/redis');
 var emailSender = require('../utils/emailSend');
 
 setInterval(function () {
-  console.log('Hi');
+  // console.log('Hi');
 }, 1000);

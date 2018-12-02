@@ -1,8 +1,13 @@
 var redis = require('redis');
-var redisClient = redis.createClient({
+var config = require('./config');
+
+// console.log(config.REDIS_URL);
+
+var redisClient = redis.createClient(config.REDIS_URL, {
+  port: 6379,
   retry_strategy: function (options) {
-    if (options.attempt > 2) {
-      console.log('Giving up on Redis.')
+    if (options.attempt > 5) {
+      console.log('Giving up on Redis.');
 
       return new Error('Exhausted all retrials');
     }
