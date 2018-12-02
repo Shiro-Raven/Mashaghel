@@ -5,4 +5,6 @@ export class Todo {
     deadline: Date;
     type: String;
     emails: String[];
+    lat: number;
+    lng: number;
  }

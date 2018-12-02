@@ -5,6 +5,7 @@ import {FormControl} from '@angular/forms';
 import { MatDialog } from '@angular/material';
 import {CreateTodoComponent} from '../create-todo/create-todo.component';
 import { TodoService } from '../todo.service';
+import { MapComponent } from '../map/map.component';
 @Component({
   selector: 'app-todo',
   templateUrl: './todo.component.html',
@@ -69,6 +70,11 @@ export class TodoComponent implements OnInit {
     if (done) {
       alert('Good Job!');
     }
+  }
+  openMap(lt: any, lg: any) {
+    const dialogRef = this.dialog.open(MapComponent, {
+      data: { lat: lt.$numberDecimal, lng: lg.$numberDecimal }, width: '40%'
+    });
   }
 
 }

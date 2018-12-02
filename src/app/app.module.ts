@@ -14,16 +14,13 @@ import { TodoModule } from './todo/todo.module';
 import { AuthModule } from './auth/auth.module';
 
 import { AppRoutingModule } from './app-routing.module';
-import { TrialComponent } from './trial/trial.component';
-
-import { AgmCoreModule } from '@agm/core';
 import { CreateTodoComponent } from './todo/create-todo/create-todo.component';
+import { MapComponent } from './todo/map/map.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LandingComponent,
-    TrialComponent
+    LandingComponent
   ],
   imports: [
     AppRoutingModule,
@@ -35,12 +32,10 @@ import { CreateTodoComponent } from './todo/create-todo/create-todo.component';
     MatDialogModule,
     AppRoutingModule,
     TodoModule,
-    AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCdpRX211Yu77Vwm0NNwjceaLdeLOurd8A'
-    })
+
   ],
   providers: [],
   bootstrap: [AppComponent],
-  entryComponents: [SignUpComponent, LoginComponent, CreateTodoComponent]
+  entryComponents: [SignUpComponent, LoginComponent, CreateTodoComponent, MapComponent]
 })
 export class AppModule { }

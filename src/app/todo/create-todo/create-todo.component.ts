@@ -23,7 +23,10 @@ export class CreateTodoComponent {
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
   emails: string[] = [];
-
+  lat = 30.0560109;
+  lng = 31.2221738;
+  zoom = 14.24;
+  checked = false;
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -56,16 +59,23 @@ export class CreateTodoComponent {
   onNoClick(): void {
     this.dialogRef.close();
   }
+  test(event) {
+    this.lat = event.coords.lat;
+    this.lng = event.coords.lng;
+  }
 
   onSubmit() {
     const array = this.time.split(':', 2);
     this.date.setHours(parseInt(array[0], 10), parseInt(array[1], 10), 0, 0);
+    console.log(this.lat, this.lng);
     const todoData = {
       name: this.name,
       description: this.description,
       deadline: this.date,
       type: this.type,
-      emails: this.emails
+      emails: this.emails,
+      lat: this.lat,
+      lng: this.lng
     };
 
     const _this = this;
