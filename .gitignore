@@ -7,7 +7,7 @@ yarn-error.log*
 
 mongod.exe.lnk
 
-api/config/config.js
+/api/config/config.js
 
 # Runtime data
 pids
