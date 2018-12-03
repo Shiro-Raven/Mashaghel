@@ -4,7 +4,7 @@ Your go-to to-do web app. Build with :heart: using MEAN stack, with the help of 
 
 ## How to run the program:- 
 
-**WARNING** Docker configurations were only tested on Docker Toolbox running on Windows 8.1. The environment variables provide the IP of the entry point and shall be changed accordingly in the `src/environment/environment.prod.ts` file.
+**WARNING** Docker configurations were only tested on Docker Toolbox running on Windows 8.1. The environment variables provide the IP of the entry point and shall be changed accordingly in a `src/environment/environment.prod.ts` file.
 
 [TL;DR]   Just run `docker-compose up` in a terminal in the root directory of the project. Just make sure you have docker installed. And an internet connection :stuck_out_tongue: 
 
