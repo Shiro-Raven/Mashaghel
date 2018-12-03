@@ -32,25 +32,27 @@ export class TodoComponent implements OnInit {
     const _this = this;
 
     const todoData = {
-      date: _this.date.setHours(0, 0, 0, 0)
+      date: _this.date.setHours(0, 0, 0, 0),
+      email: this.cookiesService.get('user')
     };
 
     this.todoService.getTodos(todoData).subscribe(function (res) {
       _this.todos = res.data;
     }, function (err) {
-      alert(err.error.message);
+      console.log(err.error.message);
     });
   }
 
   reload() {
     const _this = this;
     const todoData = {
-      date: _this.date.setHours(0, 0, 0, 0)
+      date: _this.date.setHours(0, 0, 0, 0),
+      email: this.cookiesService.get('user')
     };
     this.todoService.getTodos(todoData).subscribe(function (res) {
       _this.todos = res.data;
     }, function (err) {
-      alert(err.error.message);
+      console.log(err.error.message);
     });
   }
 
@@ -74,9 +76,9 @@ export class TodoComponent implements OnInit {
         break;
       }
     }
-    this.todoService.deleteTodo(_id).subscribe(function (res) {
+    this.todoService.deleteTodo(_id).subscribe(function () {
     }, function (err) {
-      alert(err.error.message);
+      console.log(err.error.message);
     });
     if (done) {
       alert('Good Job!');
@@ -90,13 +92,10 @@ export class TodoComponent implements OnInit {
   }
 
   logout() {
+    this.router.navigateByUrl('/');
+    this.cookiesService.delete('user');
     const _this = this;
-    this.authService.signOut().subscribe(function () {
-      _this.cookiesService.delete('user');
-      _this.router.navigateByUrl('/');
-    }, function (err) {
-      console.log(err);
-    });
+    this.authService.signOut().subscribe();
   }
 
 }

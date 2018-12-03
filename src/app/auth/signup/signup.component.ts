@@ -44,7 +44,7 @@ export class SignUpComponent {
         alert('Sign-Up successful');
         _this.dialogRef.close(true);
       }, function (err) {
-        alert(err.error.message);
+        console.log(err.error.message);
       });
     }
   }

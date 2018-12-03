@@ -4,6 +4,7 @@ var config = require('../config/config');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var ToDo = mongoose.model('ToDo');
+var timeDrift = require('../config/config').TIME_DRIFT;
 
 module.exports.createToDo = function (req, res) {
   if (!req.body.name) {
@@ -74,31 +75,6 @@ module.exports.createToDo = function (req, res) {
   });
 };
 
-module.exports.readToDo = function (req, res) {
-  if (!req.body._id) {
-    return res.status(422).json({
-      data: null,
-      error: null,
-      msg: '_id Is Required!'
-    });
-  }
-
-  var todo = req.user.todos.id(req.body._id);
-  if (!todo) {
-    return res.status(404).json({
-      data: null,
-      error: null,
-      msg: 'To Do Is Not Found!'
-    });
-  }
-
-  return res.status(200).json({
-    data: todo,
-    error: null,
-    msg: 'To Do Is Read Successfully!'
-  });
-};
-
 module.exports.getToDos = function (req, res) {
   if (!req.body.date) {
     return res.status(422).json({
@@ -107,21 +83,37 @@ module.exports.getToDos = function (req, res) {
       msg: 'date Is Required!'
     });
   }
-  var arr = [];
-  var date = new Date(req.body.date);
 
-  for (var i = 0; i < req.user.todos.length; i++) {
-    var d = new Date(req.user.todos[i].deadline);
-    d.setHours(0, 0, 0, 0);
-    if (d.getTime() === date.getTime()) {
-      arr.push(req.user.todos[i]);
+  var date = new Date(req.body.date + (timeDrift * 1000));
+  date.setHours(0, 0, 0, 0);
+
+  User.find({
+    'email': req.body.email
+  }, {
+    'todos': 1
+  }, (err, todosList) => {
+    if (err) {
+      return console.log(err);
     }
-  }
 
-  return res.status(200).json({
-    data: arr,
-    error: null,
-    msg: 'ToDos are Read Successfully!'
+    //console.log(todosList[0].todos);
+
+    var result = [];
+
+    for (var i = 0; i < todosList[0].todos.length; i++) {
+      var taskDate = new Date(todosList[0].todos[i].deadline.getTime() + (timeDrift * 1000));
+      taskDate.setHours(0, 0, 0, 0);
+
+      if (taskDate.getTime() === date.getTime()) {
+        result.push(todosList[0].todos[i]);
+      }
+    }
+
+    return res.status(200).json({
+      data: result,
+      error: null,
+      msg: 'ToDos are Read Successfully!'
+    });
   });
 };
 

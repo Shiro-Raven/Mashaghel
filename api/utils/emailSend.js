@@ -18,7 +18,7 @@ function sendReminder(email, type, todoName) {
 
   var message = {
     from: 'Mashaghel Team',
-    html: '<h2>This is to remind you that you have ' + article + ' ' + type + ' "' + todoName + '" today!</h2>' +
+    html: '<h2>This is to remind you that you have ' + article + ' ' + type.toLowerCase() + ' "' + todoName + '" today!</h2>' +
       '<br/> <h1>- Mashaghel Team</h1>',
     subject: 'To-do Reminder',
     to: email

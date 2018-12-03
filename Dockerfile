@@ -12,6 +12,6 @@ COPY . /usr/src/app
 
 EXPOSE 3000
 
-RUN $(npm bin)/ng build --prod --output-path=dist
+RUN $(npm bin)/ng build --prod --aot --output-path=dist
 
 CMD ["npm","start"]
