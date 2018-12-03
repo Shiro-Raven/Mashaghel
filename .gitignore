@@ -9,6 +9,8 @@ mongod.exe.lnk
 
 /api/config/config.js
 
+/src/environments
+
 # Runtime data
 pids
 *.pid
