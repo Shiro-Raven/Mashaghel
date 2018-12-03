@@ -30,7 +30,7 @@
         <p>
           {{todo.description}}
         </p>
-        <mat-chip-list #chipList>
+        <mat-chip-list *ngIf="todo.emails.length > 0" #chipList>
           <mat-chip *ngFor="let email of todo.emails">
             {{email}}
           </mat-chip>

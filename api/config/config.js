@@ -1,5 +1,7 @@
 /*eslint-disable */
 module.exports = {
+  EMAIL: 'fuwtrry4pcg7beqh@ethereal.email',
+  EMAIL_PASS: 'tveXxzzR5DT3ena4sA',
   MONGO_URI: process.env.NODE_ENV === 'prod' ? 'mongodb://localhost:27017/mashaghel-docker' : 'mongodb://localhost:27017/mashaghel',
   REDIS_URL: process.env.REDIS_URL || 'redis://localhost:6379',
   PORT: process.env.SERVER_PORT,

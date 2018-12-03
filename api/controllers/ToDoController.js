@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var ToDo = mongoose.model('ToDo');
 
-module.exports.createToDo = function (req, res, next) {
+module.exports.createToDo = function (req, res) {
   if (!req.body.name) {
     return res.status(422).json({
       data: null,
@@ -13,7 +13,6 @@ module.exports.createToDo = function (req, res, next) {
       msg: 'Name Is Required!'
     });
   }
-  console.log(req.body.deadline);
   if (!req.body.deadline) {
     return res.status(422).json({
       data: null,
@@ -62,7 +61,7 @@ module.exports.createToDo = function (req, res, next) {
   });
 
   req.user.todos.push(newToDo);
-  User.findByIdAndUpdate(req.user._id, req.user, function (err, _) {
+  User.findByIdAndUpdate(req.user._id, req.user, function (err) {
     if (err) {
       throw err;
     }
@@ -75,7 +74,7 @@ module.exports.createToDo = function (req, res, next) {
   });
 };
 
-module.exports.readToDo = function (req, res, next) {
+module.exports.readToDo = function (req, res) {
   if (!req.body._id) {
     return res.status(422).json({
       data: null,
@@ -100,8 +99,7 @@ module.exports.readToDo = function (req, res, next) {
   });
 };
 
-module.exports.getToDos = function (req, res, next) {
-  console.log('hey');
+module.exports.getToDos = function (req, res) {
   if (!req.body.date) {
     return res.status(422).json({
       data: null,
@@ -113,17 +111,12 @@ module.exports.getToDos = function (req, res, next) {
   var date = new Date(req.body.date);
 
   for (var i = 0; i < req.user.todos.length; i++) {
-    console.log(req.user.todos[i].deadline.getTime());
-    console.log(date.getTime());
     var d = new Date(req.user.todos[i].deadline);
     d.setHours(0, 0, 0, 0);
-    console.log(d);
     if (d.getTime() === date.getTime()) {
-      console.log(i);
       arr.push(req.user.todos[i]);
     }
   }
-  console.log(arr);
 
   return res.status(200).json({
     data: arr,
@@ -132,7 +125,7 @@ module.exports.getToDos = function (req, res, next) {
   });
 };
 
-module.exports.deleteToDo = function (req, res, next) {
+module.exports.deleteToDo = function (req, res) {
   if (!req.body._id) {
     return res.status(422).json({
       data: null,
@@ -151,7 +144,7 @@ module.exports.deleteToDo = function (req, res, next) {
   }
 
   req.user.todos.remove(todo);
-  User.findByIdAndUpdate(req.user._id, req.user, function (err, _) {
+  User.findByIdAndUpdate(req.user._id, req.user, function (err) {
     if (err) {
       throw err;
     }

@@ -1,8 +1,8 @@
 .example-card {
   max-width: 400px;
-  display: inline-block;
+  display: inline-grid;
   margin: 2px;
-  min-height: 150px;
+  height: 200px;
   background-color: #f2dfc6;
 }
 

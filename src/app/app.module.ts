@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 
 import { MatButtonModule, MatDialogModule } from '@angular/material';
+import { CookieService } from 'ngx-cookie-service';
 
 import { LandingComponent } from './landing/landing.component';
 import { SignUpComponent } from './auth/signup/signup.component';
@@ -34,7 +35,7 @@ import { MapComponent } from './todo/map/map.component';
     TodoModule,
 
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent],
   entryComponents: [SignUpComponent, LoginComponent, CreateTodoComponent, MapComponent]
 })

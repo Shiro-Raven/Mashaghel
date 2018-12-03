@@ -5,6 +5,8 @@ import { SignUpComponent } from '../auth/signup/signup.component';
 import { LoginComponent } from '../auth/login/login.component';
 import { Router } from '@angular/router';
 
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-landing',
   templateUrl: './landing.component.html',
@@ -12,7 +14,11 @@ import { Router } from '@angular/router';
 })
 export class LandingComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, public router: Router) { }
+  constructor(public dialog: MatDialog, public router: Router, private cookieService: CookieService) {
+    if (cookieService.check('user')) {
+      router.navigateByUrl('/todos');
+    }
+  }
 
   openSignup(): void {
     const dialogRef = this.dialog.open(SignUpComponent, {
