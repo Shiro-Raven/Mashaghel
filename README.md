@@ -1,11 +1,14 @@
-1) Run `mongod.exe` to start MongoDB. You can then either use Mongo Compass or `mongo.exe` terminal to check the documents.
-2) Run `npm start` to start the back-end server.
-3) Run `ng serve` to start the front-end application. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
- 
-## Code scaffolding
+# Mashaghel
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Your go-to to-do web app. Build with :heart: using MEAN stack, with the help of Redis, Docker, Git, and Google Maps.
 
-## Build
+## How to run the program:- 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+**WARNING** Docker configurations were only tested on Docker Toolbox running on Windows 8.1. The environment variables provide the IP of the entry point and shall be changed accordingly in the `src/environment/environment.prod.ts` file.
+
+[TL;DR]   Just run `docker-compose up` in a terminal in the root directory of the project. Just make sure you have docker installed. And an internet connection :stuck_out_tongue: 
+
+1) The app utilizes NPM (node package manager) for managing the dependencies of the app as well as the APIs required to communicate with the backing services (MongoDB and Redis). You need do nothing about them. They are installed automatically in the Dockerfile script.
+2) Two environment files are set in the docker-compose.yml file: `NODE_ENV`;, which differentiates the environment node is running in, and `REDIS_URL`; which is the URL needed to connect to the Redis server.
+3) The `Dockerfile` in the root directory is needed to start the application ONLY. There are no `Dockerfile`s to run the backing services. Read on...
+4) We are using MongoDB as our main databse service for storing users and their To-Dos. We are also using Redis as a pseudo-queue for sending the reminder emails. We thought Redis can be used as a persistent cache for the emails to be sent in case of blackouts, fire, etc. The `docker-compose.yml` file is responsible for running the backing services and the application. So only this file is needed to see the magic happen on your browser.

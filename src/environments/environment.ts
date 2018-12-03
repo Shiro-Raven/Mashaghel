@@ -4,6 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
+  mapsKey: 'AIzaSyCdpRX211Yu77Vwm0NNwjceaLdeLOurd8A',
   production: false,
   serverLink: 'http://localhost:3000/api/'
 };

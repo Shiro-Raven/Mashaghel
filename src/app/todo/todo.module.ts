@@ -16,6 +16,8 @@ import { TodoService } from './todo.service';
 import { AgmCoreModule } from '@agm/core';
 import { MapComponent } from './map/map.component';
 
+import { environment } from '../../environments/environment';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -35,7 +37,7 @@ import { MapComponent } from './map/map.component';
     MatSelectModule, MatOptionModule,
     MatChipsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyCdpRX211Yu77Vwm0NNwjceaLdeLOurd8A'
+      apiKey: environment.mapsKey
     }),
     MatStepperModule,
     MatCheckboxModule
